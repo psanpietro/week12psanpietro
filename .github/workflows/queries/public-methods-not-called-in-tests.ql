@@ -3,12 +3,12 @@
  * @kind problem
  * @id javascript/functions-directly-called-by-tests
  * @problem.severity recommendation
- */
+ 
 import javascript
 
-/**
+
  * Holds if a function is a test.
- */
+ 
 predicate isTest(Function test) {
   exists(CallExpr describe, CallExpr it |
     describe.getCalleeName() = "describe" and
@@ -18,9 +18,9 @@ predicate isTest(Function test) {
   )
 }
 
-/**
+
 * Holds if `caller` contains a call to `callee`.
-*/
+
 predicate calls(Function caller, Function callee) {
   exists(DataFlow::CallNode call |
     call.getEnclosingFunction() = caller and
@@ -32,3 +32,5 @@ from Function functionNotCalledByTest, Function callee
 where not exists(Function test | isTest(test) and calls(test, callee)) and
       not exists(Class c | c.getAChild*() = callee)
 select functionNotCalledByTest, "is public and not directly called by a test"
+
+*/
