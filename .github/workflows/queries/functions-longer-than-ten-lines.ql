@@ -10,8 +10,8 @@ predicate isJavaScriptOrTypeScriptFile(File file) {
   file.getExtension() = "ts" or file.getExtension() = "tsx"
 }
 
-from File file
+from Function f, File file
 where isJavaScriptOrTypeScriptFile(file) and 
-       file.getLocation().getFile() = file and
-      file.getNumLines() > 10
-select file, "Function longer than 10 lines in TypeScript file: " + file.getAbsolutePath() + " at line " + file.getLocation().getStartLine()
+      f.getLocation().getFile() = file and
+      f.getNumLines() > 10
+select f, "Function longer than 10 lines in TypeScript file: " + file.getAbsolutePath() + " at line " + f.getLocation().getStartLine()
