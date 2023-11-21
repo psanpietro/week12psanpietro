@@ -30,5 +30,5 @@ predicate calls(Function caller, Function callee) {
 
 from Function functionNotCalledByTest, Function callee
 where not exists(Function test | isTest(test) and calls(test, callee)) and
-      functionNotCalledByTest.getAccessibility() = "public"
+      not exists(Class c | c.getAChild*() = callee)
 select functionNotCalledByTest, "is public and not directly called by a test"
